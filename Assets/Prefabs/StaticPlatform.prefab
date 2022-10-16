@@ -108,3 +108,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 65896979304884269, guid: 747e7cd6ea69e5f44aeee4bd7c29986d, type: 3}
   highlightMat: {fileID: 2100000, guid: b01aeea9fd292a748b3a11f028e532aa, type: 2}
+  mouseController: {fileID: 6067003535868923735, guid: 2fe0ebd593735bd44aaa82e00af535dc,
+    type: 3}

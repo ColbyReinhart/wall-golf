@@ -240,6 +240,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5001854749105989775, guid: d38296c1713078d4a9d443c0647f67cd,
+        type: 3}
+      propertyPath: mouseController
+      value: 
+      objectReference: {fileID: 6067003535031574037}
     - target: {fileID: 3912185843008443366, guid: d38296c1713078d4a9d443c0647f67cd,
         type: 3}
       propertyPath: m_Name
@@ -371,3 +376,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fe0ebd593735bd44aaa82e00af535dc, type: 3}
+--- !u!1 &6067003535031574037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1183280465463416813, guid: 2fe0ebd593735bd44aaa82e00af535dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 6067003535031574036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6067003535031574038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067003535031574037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a566a27359217944c84229fab7d14805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
