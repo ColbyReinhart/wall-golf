@@ -67,7 +67,6 @@ public class MoveableObject : MonoBehaviour
         highlight.SetActive(isSelected);
     }
 
-    // Selection/highlight
     private bool isSelected;
     private GameObject highlight;
     private const float highlightFactor = 1.05f;

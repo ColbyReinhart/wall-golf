@@ -22,7 +22,6 @@ public class MouseController : MonoBehaviour
         // https://answers.unity.com/questions/1316731/mouse-click-raycast-colliders.html#:~:text=Mouse%20Click%20%2B%20Raycast%20%2B%20Colliders%20-,Unity%20Answers%20Ray%20ray%20%3D%20Camera.main.ScreenPointToRay%28Input.mousePosition%29%3B%20RaycastHit%20hit%3B
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
         if (Physics.Raycast(ray, out hit))
         {
             // pointedObj will be null if we hit something that's not a moveable object
@@ -57,6 +56,21 @@ public class MouseController : MonoBehaviour
                 selectedObj = null;
             }
         }
+
+        // Check for arrow key inputs
+        if (selectedObj != null)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                Quaternion rot = selectedObj.gameObject.transform.rotation;
+                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, rot.z + rotateFactor);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                Quaternion rot = selectedObj.gameObject.transform.rotation;
+                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, rot.z - rotateFactor);
+            }
+        }
     }
 
     public Vector3 getMousePos()
@@ -73,4 +87,5 @@ public class MouseController : MonoBehaviour
     private Vector3 prevMousePos;
     private MoveableObject pointedObj;
     private MoveableObject selectedObj;
+    private const float rotateFactor = 5f; // The amount of degrees to rotate by
 }
