@@ -47,27 +47,24 @@ public class MoveableObject : MonoBehaviour
 
     }
 
-    private void OnMouseUp()
-    {
-        Select();
-    }
-
     private void OnMouseDrag()
     {
         if (isSelected)
         {
             transform.position += mouseController.GetComponent<MouseController>().getMouseDelta();
-            Debug.Log(mouseController.GetComponent<MouseController>().getMouseDelta());
         }
     }
 
-    void Select()
+    public void Select()
     {
-        if (!player.GetComponent<Player>().IsPlayMode())
-        {
-            isSelected = true;
-            highlight.SetActive(isSelected);
-        }
+        isSelected = true;
+        highlight.SetActive(isSelected);
+    }
+
+    public void Deselect()
+    {
+        isSelected = false;
+        highlight.SetActive(isSelected);
     }
 
     // Selection/highlight
