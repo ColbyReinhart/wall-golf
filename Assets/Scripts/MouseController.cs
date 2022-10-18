@@ -63,12 +63,12 @@ public class MouseController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 Quaternion rot = selectedObj.gameObject.transform.rotation;
-                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, rot.z + rotateFactor);
+                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z + rotateFactor));
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 Quaternion rot = selectedObj.gameObject.transform.rotation;
-                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, rot.z - rotateFactor);
+                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z - rotateFactor));
             }
         }
     }
