@@ -36,7 +36,7 @@ public class MoveableObject : MonoBehaviour
 
         // Move it behind the parent
         Vector3 oldPos = transform.position;
-        highlight.transform.position = new Vector3(oldPos.x, oldPos.y, oldPos.z + 1);
+        highlight.transform.position = new Vector3(oldPos.x, oldPos.y, oldPos.z + 0.1f);
 
         // The highlight won't initially appear
         highlight.SetActive(false);
@@ -51,9 +51,19 @@ public class MoveableObject : MonoBehaviour
     {
         if (isSelected)
         {
-            Debug.Log(inputController.GetComponent<InputController>() != null);
-            Debug.Log(inputController.GetComponent<InputController>().getMouseDelta());
-            transform.position += inputController.GetComponent<InputController>().getMouseDelta();
+            Vector3 newPos = transform.position + inputController.GetComponent<InputController>().getMouseDelta();
+
+            Debug.Log(newPos.x);
+            Debug.Log(bounds.bottomLeftX + bounds.width);
+            Debug.Log(bounds.bottomLeftX);
+            Debug.Log(bounds.width);
+            if (newPos.x > bounds.bottomLeftX + bounds.width) newPos.x = bounds.bottomLeftX + bounds.width;
+            else if (newPos.x < bounds.bottomLeftX) newPos.x = bounds.bottomLeftX;
+
+            if (newPos.y > bounds.bottomLeftY + bounds.height) newPos.y = bounds.bottomLeftY + bounds.height;
+            else if (newPos.y < bounds.bottomLeftY) newPos.y = bounds.bottomLeftY;
+
+            transform.position = newPos;
         }
     }
 
@@ -69,7 +79,24 @@ public class MoveableObject : MonoBehaviour
         highlight.SetActive(isSelected);
     }
 
+    // This sets the world bounds "according to the moveable object", meaning that
+    // the bounds are such that is it guaranteed that the object will still be in
+    // frame regardless of it's orientation and/or size as long as it remains within
+    // these bounds.
+    public void SetWorldBounds(MoveableObjController.WorldBounds worldBounds)
+    {
+        bounds.bottomLeftX = worldBounds.bottomLeftX + (transform.localScale.x / 2f);
+        bounds.bottomLeftY = worldBounds.bottomLeftY + (transform.localScale.y / 2f);
+        bounds.width = worldBounds.width - transform.localScale.x;
+        Debug.Log("TEst");
+        Debug.Log(worldBounds.bottomLeftX);
+        Debug.Log(worldBounds.width);
+        Debug.Log(transform.localScale.x);
+        bounds.height = worldBounds.height - transform.localScale.y;
+    }
+
     private bool isSelected;
     private GameObject highlight;
+    private MoveableObjController.WorldBounds bounds;
     private const float highlightFactor = 1.05f;
 }
