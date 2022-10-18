@@ -21,7 +21,7 @@ public class InputController : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // Check what mouse is looking at
-        // https://answers.unity.com/questions/1316731/mouse-click-raycast-colliders.html#:~:text=Mouse%20Click%20%2B%20Raycast%20%2B%20Colliders%20-,Unity%20Answers%20Ray%20ray%20%3D%20Camera.main.ScreenPointToRay%28Input.mousePosition%29%3B%20RaycastHit%20hit%3B
+        // https://answers.unity.com/questions/1316731/mouse-click-raycast-colliders.html
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
