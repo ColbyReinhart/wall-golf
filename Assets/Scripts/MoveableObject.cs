@@ -6,7 +6,7 @@ public class MoveableObject : MonoBehaviour
 {
     public GameObject player;
     public Material highlightMat;
-    public GameObject mouseController;
+    public GameObject inputController;
 
     // We achieve highlighting without having to mess with shaders
     // through this hack. A highlight is just a copy of the object
@@ -51,7 +51,9 @@ public class MoveableObject : MonoBehaviour
     {
         if (isSelected)
         {
-            transform.position += mouseController.GetComponent<MouseController>().getMouseDelta();
+            Debug.Log(inputController.GetComponent<InputController>() != null);
+            Debug.Log(inputController.GetComponent<InputController>().getMouseDelta());
+            transform.position += inputController.GetComponent<InputController>().getMouseDelta();
         }
     }
 
