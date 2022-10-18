@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
-        playMode = false;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -15,11 +17,4 @@ public class Player : MonoBehaviour
     {
         
     }
-
-    public bool IsPlayMode()
-    {
-        return playMode;
-    }
-
-    private bool playMode; // Are we in play mode? If not, edit mode
 }

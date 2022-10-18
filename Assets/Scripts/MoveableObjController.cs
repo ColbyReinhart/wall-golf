@@ -13,10 +13,14 @@ public class MoveableObjController : MonoBehaviour
     }
 
     private ArrayList moveables;
+    private GameObject ball;
 
     // Start is called before the first frame update
     void Start()
     {
+        ball = GameObject.FindGameObjectWithTag("Player");
+        SetPlayMode(false);
+
         // Get world coordinate bounds using screen dimensions
         Vector3 bottomLeftBounds = Camera.main.ScreenToWorldPoint(Vector3.zero);
         Vector3 topRightBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
@@ -26,18 +30,21 @@ public class MoveableObjController : MonoBehaviour
         bounds.width = topRightBounds.x - bottomLeftBounds.x;
         bounds.height = topRightBounds.y - bottomLeftBounds.y;
 
-        Debug.Log(bottomLeftBounds.x);
-        Debug.Log(bottomLeftBounds.y);
-        Debug.Log(topRightBounds.x - bottomLeftBounds.x);
-        Debug.Log(topRightBounds.y - bottomLeftBounds.y);
-
         // Create a list of moveable object children and tell them the world bounds
         moveables = new ArrayList();
         foreach (Transform child in transform)
         {
             child.GetComponent<MoveableObject>().SetWorldBounds(bounds);
-            moveables.Add(child);
+            moveables.Add(child.gameObject);
         }
+    }
+
+    public void SetPlayMode(bool playMode)
+    {
+        // Toggle physics on the ball
+        Rigidbody ballRb = ball.GetComponent<Rigidbody>();
+        ballRb.useGravity = playMode;
+        ballRb.velocity = Vector3.zero;
     }
 
     // Update is called once per frame

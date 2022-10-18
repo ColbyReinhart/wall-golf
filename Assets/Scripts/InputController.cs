@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
+    public GameObject moveableObjController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,7 @@ public class InputController : MonoBehaviour
             pointedObj = null;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !playMode)
         {
             // If we're left clicking and pointing at a moveable object,
             // deselect the old one (if applicable) and select the new
@@ -71,6 +73,19 @@ public class InputController : MonoBehaviour
                 selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z - rotateFactor));
             }
         }
+
+        // If the user hits the spacebar, tell the object controller to switch modes
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playMode = !playMode;
+            moveableObjController.GetComponent<MoveableObjController>().SetPlayMode(playMode);
+
+            if (selectedObj != null)
+            {
+                selectedObj.Deselect();
+                selectedObj = null;
+            }
+        }
     }
 
     public Vector3 getMousePos()
@@ -87,5 +102,6 @@ public class InputController : MonoBehaviour
     private Vector3 prevMousePos;
     private MoveableObject pointedObj;
     private MoveableObject selectedObj;
+    private bool playMode = false;
     private const float rotateFactor = 5f; // The amount of degrees to rotate by
 }

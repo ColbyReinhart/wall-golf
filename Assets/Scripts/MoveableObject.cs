@@ -53,10 +53,6 @@ public class MoveableObject : MonoBehaviour
         {
             Vector3 newPos = transform.position + inputController.GetComponent<InputController>().getMouseDelta();
 
-            Debug.Log(newPos.x);
-            Debug.Log(bounds.bottomLeftX + bounds.width);
-            Debug.Log(bounds.bottomLeftX);
-            Debug.Log(bounds.width);
             if (newPos.x > bounds.bottomLeftX + bounds.width) newPos.x = bounds.bottomLeftX + bounds.width;
             else if (newPos.x < bounds.bottomLeftX) newPos.x = bounds.bottomLeftX;
 
@@ -88,10 +84,6 @@ public class MoveableObject : MonoBehaviour
         bounds.bottomLeftX = worldBounds.bottomLeftX + (transform.localScale.x / 2f);
         bounds.bottomLeftY = worldBounds.bottomLeftY + (transform.localScale.y / 2f);
         bounds.width = worldBounds.width - transform.localScale.x;
-        Debug.Log("TEst");
-        Debug.Log(worldBounds.bottomLeftX);
-        Debug.Log(worldBounds.width);
-        Debug.Log(transform.localScale.x);
         bounds.height = worldBounds.height - transform.localScale.y;
     }
 
