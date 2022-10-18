@@ -51,14 +51,17 @@ public class MoveableObject : MonoBehaviour
     {
         if (isSelected)
         {
+            // Get the position of where the object is to be moved
             Vector3 newPos = transform.position + inputController.GetComponent<InputController>().getMouseDelta();
 
+            // Make sure this is within legal bounds
             if (newPos.x > bounds.bottomLeftX + bounds.width) newPos.x = bounds.bottomLeftX + bounds.width;
             else if (newPos.x < bounds.bottomLeftX) newPos.x = bounds.bottomLeftX;
 
             if (newPos.y > bounds.bottomLeftY + bounds.height) newPos.y = bounds.bottomLeftY + bounds.height;
             else if (newPos.y < bounds.bottomLeftY) newPos.y = bounds.bottomLeftY;
 
+            // Move the object to the new position
             transform.position = newPos;
         }
     }

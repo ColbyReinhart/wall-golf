@@ -18,6 +18,7 @@ public class MoveableObjController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // First, get the ball and tell it to sit still
         ball = GameObject.FindGameObjectWithTag("Player");
         SetPlayMode(false);
 
@@ -41,10 +42,14 @@ public class MoveableObjController : MonoBehaviour
 
     public void SetPlayMode(bool playMode)
     {
-        // Toggle physics on the ball
+        // Toggle ball physics
         Rigidbody ballRb = ball.GetComponent<Rigidbody>();
         ballRb.useGravity = playMode;
         ballRb.velocity = Vector3.zero;
+
+        // Toggle ball collision
+        Collider ballCol = ball.GetComponent<Collider>();
+        ballCol.enabled = playMode;
     }
 
     // Update is called once per frame

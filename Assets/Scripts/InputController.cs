@@ -50,7 +50,7 @@ public class InputController : MonoBehaviour
                 selectedObj.Select();
             }
 
-            // If we're left clicking and missed the raycast,
+            // If we're left clicking on nothing,
             // deselect the selected item
             else if (pointedObj == null && selectedObj != null)
             {
@@ -80,17 +80,13 @@ public class InputController : MonoBehaviour
             playMode = !playMode;
             moveableObjController.GetComponent<MoveableObjController>().SetPlayMode(playMode);
 
+            // Deselect the currently selected object
             if (selectedObj != null)
             {
                 selectedObj.Deselect();
                 selectedObj = null;
             }
         }
-    }
-
-    public Vector3 getMousePos()
-    {
-        return mousePos;
     }
 
     public Vector3 getMouseDelta()
@@ -103,5 +99,5 @@ public class InputController : MonoBehaviour
     private MoveableObject pointedObj;
     private MoveableObject selectedObj;
     private bool playMode = false;
-    private const float rotateFactor = 5f; // The amount of degrees to rotate by
+    private const float rotateFactor = 5f;
 }
