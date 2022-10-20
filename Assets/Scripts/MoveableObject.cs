@@ -69,7 +69,7 @@ public class MoveableObject : MonoBehaviour
     public void Select()
     {
         isSelected = true;
-        highlight.SetActive(isSelected);
+        highlight.SetActive(true);
     }
 
     public void Deselect()
