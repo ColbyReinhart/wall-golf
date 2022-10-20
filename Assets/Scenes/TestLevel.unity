@@ -152,8 +152,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 395519814}
-  - component: {fileID: 395519815}
-  - component: {fileID: 395519816}
   - component: {fileID: 395519817}
   m_Layer: 0
   m_Name: Fan
@@ -171,40 +169,12 @@ Transform:
   m_GameObject: {fileID: 395519813}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -3.9567, y: -5.3079915, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 1263306815}
   m_Father: {fileID: 2140049373}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &395519815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395519813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13c01afd563225c4fac3497285afc7c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 395508938}
-  highlightMat: {fileID: 2100000, guid: b01aeea9fd292a748b3a11f028e532aa, type: 2}
-  inputController: {fileID: 1222160068}
---- !u!65 &395519816
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395519813}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &395519817
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -257,7 +227,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10.000008, y: 0.0000023841862, z: 10.000005}
+  m_Size: {x: 10, y: 1, z: 10}
   m_Center: {x: 0.00000071525574, y: 0, z: 0}
 --- !u!23 &714431176
 MeshRenderer:
@@ -324,7 +294,8 @@ GameObject:
   - component: {fileID: 1263306814}
   - component: {fileID: 1263306813}
   - component: {fileID: 1263306812}
-  m_Layer: 2
+  - component: {fileID: 1263306816}
+  m_Layer: 0
   m_Name: FanBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,14 +369,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263306811}
-  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 714431174}
   m_Father: {fileID: 395519814}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!114 &1263306816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263306811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c01afd563225c4fac3497285afc7c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 395508938}
+  highlightMat: {fileID: 2100000, guid: b01aeea9fd292a748b3a11f028e532aa, type: 2}
+  inputController: {fileID: 1222160068}
 --- !u!1 &2140049372 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8782491647474608178, guid: c9b9305b178d0e7429ba18803cfdcbf1,
@@ -649,6 +635,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 395508938}
+    - target: {fileID: 6433228621398429060, guid: d38296c1713078d4a9d443c0647f67cd,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6433228621398429060, guid: d38296c1713078d4a9d443c0647f67cd,
         type: 3}
       propertyPath: inputController

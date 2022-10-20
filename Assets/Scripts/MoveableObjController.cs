@@ -12,7 +12,6 @@ public class MoveableObjController : MonoBehaviour
         public float height;
     }
 
-    private ArrayList moveables;
     private GameObject ball;
 
     // Start is called before the first frame update
@@ -31,12 +30,10 @@ public class MoveableObjController : MonoBehaviour
         bounds.width = topRightBounds.x - bottomLeftBounds.x;
         bounds.height = topRightBounds.y - bottomLeftBounds.y;
 
-        // Create a list of moveable object children and tell them the world bounds
-        moveables = new ArrayList();
-        foreach (Transform child in transform)
+        // Set the world bounds for each moveable object
+        foreach (MoveableObject obj in GetComponentsInChildren<MoveableObject>())
         {
-            child.GetComponent<MoveableObject>().SetWorldBounds(bounds);
-            moveables.Add(child.gameObject);
+            obj.SetWorldBounds(bounds);
         }
     }
 
