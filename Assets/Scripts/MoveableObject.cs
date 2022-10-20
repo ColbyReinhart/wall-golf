@@ -31,10 +31,8 @@ public class MoveableObject : MonoBehaviour
 
         // Make it slightly larger than the parent
         Vector3 parentDimensions = this.GetComponent<Collider>().bounds.size;
-        Debug.Log(parentDimensions);
         float widthRatio = (transform.localScale.x / transform.localScale.y);
         highlight.transform.localScale = new Vector3(highlightFactor, (highlightFactor - 1f) * widthRatio + 1f, 1f);
-        Debug.Log(highlight.transform.localScale);
 
         // Move it behind the parent
         Vector3 oldPos = transform.position;
