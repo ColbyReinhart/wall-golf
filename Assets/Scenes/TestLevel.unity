@@ -266,7 +266,7 @@ PrefabInstance:
     - target: {fileID: 5542984507343792488, guid: 776d3d6c0be669b46977798fd99bdc9a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5542984507343792488, guid: 776d3d6c0be669b46977798fd99bdc9a,
         type: 3}
@@ -332,13 +332,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2140049373}
     m_Modifications:
-    - target: {fileID: -5001854749105989775, guid: d38296c1713078d4a9d443c0647f67cd,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: inputController
       value: 
       objectReference: {fileID: 1222160068}
-    - target: {fileID: -5001854749105989775, guid: d38296c1713078d4a9d443c0647f67cd,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: mouseController
       value: 
       objectReference: {fileID: 0}
@@ -370,17 +368,17 @@ PrefabInstance:
     - target: {fileID: 3912185843008443370, guid: d38296c1713078d4a9d443c0647f67cd,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3912185843008443370, guid: d38296c1713078d4a9d443c0647f67cd,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3912185843008443370, guid: d38296c1713078d4a9d443c0647f67cd,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3912185843008443370, guid: d38296c1713078d4a9d443c0647f67cd,
         type: 3}
@@ -397,6 +395,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6433228621398429060, guid: d38296c1713078d4a9d443c0647f67cd,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 395508938}
+    - target: {fileID: 6433228621398429060, guid: d38296c1713078d4a9d443c0647f67cd,
+        type: 3}
+      propertyPath: inputController
+      value: 
+      objectReference: {fileID: 1222160068}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d38296c1713078d4a9d443c0647f67cd, type: 3}
 --- !u!1001 &6067003535031574036
@@ -448,7 +456,7 @@ PrefabInstance:
     - target: {fileID: 8782491647474608179, guid: c9b9305b178d0e7429ba18803cfdcbf1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8782491647474608179, guid: c9b9305b178d0e7429ba18803cfdcbf1,
         type: 3}
