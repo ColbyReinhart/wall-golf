@@ -20,42 +20,45 @@ public class InputController : MonoBehaviour
         prevMousePos = mousePos;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // Check what mouse is looking at
-        // https://answers.unity.com/questions/1316731/mouse-click-raycast-colliders.html
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            // pointedObj will be null if we hit something that's not a moveable object
-            pointedObj = hit.collider.gameObject.GetComponent<MoveableObject>();
-        }
-        else
-        {
-            pointedObj = null;
-        }
-
         if (Input.GetMouseButtonDown(0) && !playMode)
         {
-            // If we're left clicking and pointing at a moveable object,
-            // deselect the old one (if applicable) and select the new
-            // moveable object
-            if (pointedObj != selectedObj && pointedObj != null)
+            // Check what mouse is looking at
+            // https://answers.unity.com/questions/1316731/mouse-click-raycast-colliders.html
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
             {
-                if (selectedObj != null)
-                {
-                    selectedObj.Deselect();
-                }
-
-                selectedObj = pointedObj;
-                selectedObj.Select();
+                // pointedObj will be null if we hit something that's not a moveable object
+                pointedObj = hit.collider.gameObject.GetComponent<MoveableObject>();
+            }
+            else
+            {
+                pointedObj = null;
             }
 
-            // If we're left clicking on nothing,
-            // deselect the selected item
-            else if (pointedObj == null && selectedObj != null)
+            if (!playMode)
             {
-                selectedObj.Deselect();
-                selectedObj = null;
+                // If we're left clicking and pointing at a moveable object,
+                // deselect the old one (if applicable) and select the new
+                // moveable object
+                if (pointedObj != selectedObj && pointedObj != null)
+                {
+                    if (selectedObj != null)
+                    {
+                        selectedObj.Deselect();
+                    }
+
+                    selectedObj = pointedObj;
+                    selectedObj.Select();
+                }
+
+                // If we're left clicking on nothing,
+                // deselect the selected item
+                else if (pointedObj == null && selectedObj != null)
+                {
+                    selectedObj.Deselect();
+                    selectedObj = null;
+                }
             }
         }
 

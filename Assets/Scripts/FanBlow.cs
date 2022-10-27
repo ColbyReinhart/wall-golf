@@ -8,24 +8,25 @@ public class FanBlow : MonoBehaviour
     void Start()
     {
         calculateForceVec();
-        Debug.Log(transform.parent.transform.rotation.z);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.parent.transform.localRotation.z != zRot)
+        // If the rotation has changed, update the force vector
+        if (transform.parent.transform.rotation.eulerAngles.z != zRot)
         {
             calculateForceVec();
         }
     }
 
+    // Convert the rotation of the fan into a force vector
     private void calculateForceVec()
     {
-        zRot = transform.parent.transform.rotation.z;
-        forceVec = new Vector3(Mathf.Cos(zRot), Mathf.Sin(zRot), 0f);
+        zRot = transform.parent.transform.rotation.eulerAngles.z;
+        float zRotRadians = Mathf.PI * zRot / 180.0f;
+        forceVec = new Vector3(Mathf.Cos(zRotRadians), Mathf.Sin(zRotRadians), 0f);
         forceVec *= fanMagnitude;
-        Debug.Log(forceVec);
     }
 
     private void OnTriggerStay(Collider other)
