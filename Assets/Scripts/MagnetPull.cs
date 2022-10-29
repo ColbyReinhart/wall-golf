@@ -30,9 +30,6 @@ public class MagnetPull : MonoBehaviour
         float zRotRadians = Mathf.PI * invertedZRot / 180.0f;
         forceVec = new Vector3(Mathf.Cos(zRotRadians), Mathf.Sin(zRotRadians), 0f);
         forceVec *= magnetMagnitude;
-
-        Debug.Log(invertedZRot);
-        Debug.Log(forceVec);
     }
 
     private void OnTriggerStay(Collider other)
