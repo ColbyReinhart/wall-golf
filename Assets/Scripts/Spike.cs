@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spike : MoveableObject
+public class Spike : MonoBehaviour
 {
-    private void Awake()
-    {
-        highlightFactor = 1.15f;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         //if the player collides with the spikes destroy it
