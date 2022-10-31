@@ -47,6 +47,12 @@ public class MoveableObjController : MonoBehaviour
         // Toggle ball collision
         Collider ballCol = ball.GetComponent<Collider>();
         ballCol.enabled = playMode;
+
+        // Reset the ball's position when entering edit mode
+        if (!playMode)
+        {
+            ball.GetComponent<Player>().resetPosition();
+        }
     }
 
     // Update is called once per frame
