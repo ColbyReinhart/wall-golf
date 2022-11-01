@@ -5,7 +5,7 @@ using UnityEngine;
 public class ExplosiveBarrel : MoveableObject
 {
     private const float explosionRadius = 10.0f;    // How large is the explosion? (physics, not visually)
-    private const float explosionMagnitude = 150.0f;  // How much force will the explosion give? (fades with distance)
+    private const float explosionMagnitude = 1500.0f;  // How much force will the explosion give? (fades with distance)
     private const float explosionVelocity = 8.0f;   // How fast must a collision be before the barrel explodes?
     private Rigidbody ballRb;
 
