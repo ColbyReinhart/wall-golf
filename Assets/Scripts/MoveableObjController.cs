@@ -53,6 +53,12 @@ public class MoveableObjController : MonoBehaviour
         {
             ball.GetComponent<Player>().resetPosition();
         }
+
+        // Set play mode for all moveable objects
+        foreach (MoveableObject obj in GetComponentsInChildren<MoveableObject>())
+        {
+            obj.SetPlayMode(playMode);
+        }
     }
 
     // Update is called once per frame
