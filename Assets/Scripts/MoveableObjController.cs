@@ -21,6 +21,8 @@ public class MoveableObjController : MonoBehaviour
     {
         // First, get the ball and tell it to sit still
         ball = GameObject.FindGameObjectWithTag("Player");
+        ballRb = ball.GetComponent<Rigidbody>();
+        ballCol = ball.GetComponent<Collider>();
         SetPlayMode(false);
 
         // Get world coordinate bounds using screen dimensions
@@ -37,10 +39,6 @@ public class MoveableObjController : MonoBehaviour
         {
             obj.SetWorldBounds(bounds);
         }
-
-        // Initialize some other variables
-        ballRb = ball.GetComponent<Rigidbody>();
-        ballCol = ball.GetComponent<Collider>();
     }
 
     public void SetPlayMode(bool playMode)
