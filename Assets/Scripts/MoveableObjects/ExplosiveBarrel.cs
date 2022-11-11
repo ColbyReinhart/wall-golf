@@ -13,13 +13,18 @@ public class ExplosiveBarrel : MoveableObject
     public GameObject explosion;
 
     private bool isExploded = false;
+    private bool playMode = false;
+    private Rigidbody rb;
 
     private void Awake()
     {
+        // Initialize variables
         highlightFactor = 1.05f;
-        SetPlayMode(false);
+        rb = GetComponent<Rigidbody>();
         ballRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
-        Debug.Assert(ballRb != null);
+
+        // Set play mode
+        SetPlayMode(false);
     }
 
     private void Update()
@@ -35,12 +40,17 @@ public class ExplosiveBarrel : MoveableObject
                 Destroy(this);
             }
         }
+
+        // This is the best way to disable the rigidbody while in build mode
+        if (!playMode)
+        {
+            rb.Sleep();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.relativeVelocity);///
-        if (collision.relativeVelocity.magnitude > explosionVelocity)
+        if (collision.relativeVelocity.magnitude > explosionVelocity && playMode)
         {
             // Do the explosion
             ballRb.AddExplosionForce(explosionMagnitude, transform.position, explosionRadius);
@@ -57,8 +67,11 @@ public class ExplosiveBarrel : MoveableObject
 
     public override void SetPlayMode(bool play)
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.useGravity = play;
-        rb.velocity = Vector3.zero;
+        playMode = play;
+
+        if (playMode)
+        {
+            rb.WakeUp();
+        }
     }
 }
