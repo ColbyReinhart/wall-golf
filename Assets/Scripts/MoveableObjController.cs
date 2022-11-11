@@ -13,6 +13,8 @@ public class MoveableObjController : MonoBehaviour
     }
 
     private GameObject ball;
+    private Rigidbody ballRb;
+    private Collider ballCol;
 
     // Start is called before the first frame update
     void Start()
@@ -35,17 +37,19 @@ public class MoveableObjController : MonoBehaviour
         {
             obj.SetWorldBounds(bounds);
         }
+
+        // Initialize some other variables
+        ballRb = ball.GetComponent<Rigidbody>();
+        ballCol = ball.GetComponent<Collider>();
     }
 
     public void SetPlayMode(bool playMode)
     {
         // Toggle ball physics
-        Rigidbody ballRb = ball.GetComponent<Rigidbody>();
         ballRb.useGravity = playMode;
         ballRb.velocity = Vector3.zero;
 
         // Toggle ball collision
-        Collider ballCol = ball.GetComponent<Collider>();
         ballCol.enabled = playMode;
 
         // Reset the ball's position when entering edit mode
@@ -59,11 +63,5 @@ public class MoveableObjController : MonoBehaviour
         {
             obj.SetPlayMode(playMode);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
