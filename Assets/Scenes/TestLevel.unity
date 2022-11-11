@@ -149,18 +149,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2785144153766209890}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2140049372 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8782491647474608178, guid: c9b9305b178d0e7429ba18803cfdcbf1,
-    type: 3}
-  m_PrefabInstance: {fileID: 8782491648186755054}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2140049373 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8782491647474608179, guid: c9b9305b178d0e7429ba18803cfdcbf1,
     type: 3}
   m_PrefabInstance: {fileID: 8782491648186755054}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2140049374 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8782491647474608176, guid: c9b9305b178d0e7429ba18803cfdcbf1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8782491648186755054}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39120e1435d7fc4448187611cc84c248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &65896979060741351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262,7 +268,7 @@ PrefabInstance:
         type: 3}
       propertyPath: moveableObjController
       value: 
-      objectReference: {fileID: 2140049372}
+      objectReference: {fileID: 2140049374}
     - target: {fileID: 5542984507343792488, guid: 776d3d6c0be669b46977798fd99bdc9a,
         type: 3}
       propertyPath: m_RootOrder

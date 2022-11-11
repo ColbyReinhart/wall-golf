@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ExplosiveBarrel : MoveableObject
 {
-    private const float explosionRadius = 10.0f;    // How large is the explosion? (physics, not visually)
-    private const float explosionMagnitude = 1500.0f;  // How much force will the explosion give? (fades with distance)
-    private const float explosionVelocity = 8.0f;   // How fast must a collision be before the barrel explodes?
+    public float explosionRadius = 10.0f;    // How large is the explosion? (physics, not visually)
+    public float explosionMagnitude = 1500.0f;  // How much force will the explosion give? (fades with distance)
+    public float explosionVelocity = 8.0f;   // How fast must a collision be before the barrel explodes?
+    public float explosionTime = 1.0f;
     private Rigidbody ballRb;
-
-    private bool isExploded = false;
-    private float explosionSecs = 1.0f;
     public GameObject texture;
     public GameObject explosion;
+
+    private bool isExploded = false;
 
     private void Awake()
     {
@@ -27,10 +27,10 @@ public class ExplosiveBarrel : MoveableObject
         if (isExploded)
         {
             // Count down explosion time
-            explosionSecs -= Time.deltaTime;
+            explosionTime -= Time.deltaTime;
 
             // If time runs out, destroy the barrel
-            if (explosionSecs >= 0.0f)
+            if (explosionTime >= 0.0f)
             {
                 Destroy(this);
             }
