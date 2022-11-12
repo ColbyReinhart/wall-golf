@@ -15,6 +15,7 @@ public class ExplosiveBarrel : MoveableObject
     private bool isExploded = false;
     private bool playMode = false;
     private Rigidbody rb;
+    private Vector3 startingPosition;
 
     private void Awake()
     {
@@ -22,9 +23,7 @@ public class ExplosiveBarrel : MoveableObject
         highlightFactor = 1.05f;
         rb = GetComponent<Rigidbody>();
         ballRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
-
-        // Set play mode
-        SetPlayMode(false);
+        startingPosition = transform.position;
     }
 
     private void Update()
@@ -34,10 +33,10 @@ public class ExplosiveBarrel : MoveableObject
             // Count down explosion time
             explosionTime -= Time.deltaTime;
 
-            // If time runs out, destroy the barrel
+            // If time runs out, disable the barrel
             if (explosionTime >= 0.0f)
             {
-                Destroy(this);
+                gameObject.SetActive(false);
             }
         }
 
@@ -69,9 +68,17 @@ public class ExplosiveBarrel : MoveableObject
     {
         playMode = play;
 
+        // Wake up the barrel if we're starting play mode
+        // Also, save or reset the starting transform respectively
         if (playMode)
         {
             rb.WakeUp();
+            startingPosition = transform.position;
+        }
+        else
+        {
+            transform.position = startingPosition;
+            transform.rotation = Quaternion.identity;
         }
     }
 }

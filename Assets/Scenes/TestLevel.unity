@@ -896,6 +896,11 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3495372788166835477, guid: c9b9305b178d0e7429ba18803cfdcbf1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7728712689213294956, guid: c9b9305b178d0e7429ba18803cfdcbf1,
         type: 3}
       propertyPath: player

@@ -15,15 +15,15 @@ public class MoveableObjController : MonoBehaviour
     private GameObject ball;
     private Rigidbody ballRb;
     private Collider ballCol;
+    private MoveableObject[] allMoveables;
 
     // Start is called before the first frame update
     void Start()
     {
-        // First, get the ball and tell it to sit still
+        // Get references to the ball
         ball = GameObject.FindGameObjectWithTag("Player");
         ballRb = ball.GetComponent<Rigidbody>();
         ballCol = ball.GetComponent<Collider>();
-        SetPlayMode(false);
 
         // Get world coordinate bounds using screen dimensions
         Vector3 bottomLeftBounds = Camera.main.ScreenToWorldPoint(Vector3.zero);
@@ -34,11 +34,16 @@ public class MoveableObjController : MonoBehaviour
         bounds.width = topRightBounds.x - bottomLeftBounds.x;
         bounds.height = topRightBounds.y - bottomLeftBounds.y;
 
+        // Gather all moveable objects
+        allMoveables = GetComponentsInChildren<MoveableObject>();
+
         // Set the world bounds for each moveable object
-        foreach (MoveableObject obj in GetComponentsInChildren<MoveableObject>())
+        foreach (MoveableObject obj in allMoveables)
         {
             obj.SetWorldBounds(bounds);
         }
+
+        SetPlayMode(false);
     }
 
     public void SetPlayMode(bool playMode)
@@ -56,9 +61,12 @@ public class MoveableObjController : MonoBehaviour
             ball.GetComponent<Player>().resetPosition();
         }
 
-        // Set play mode for all moveable objects
-        foreach (MoveableObject obj in GetComponentsInChildren<MoveableObject>())
+        // Set play mode for all moveable objects and make sure they
+        // are active.
+        foreach (MoveableObject obj in allMoveables)
         {
+            Debug.Log(obj.gameObject.name);
+            obj.gameObject.SetActive(true);
             obj.SetPlayMode(playMode);
         }
     }
