@@ -47,7 +47,7 @@ public class ExplosiveBarrel : MoveableObject
         ballRb.AddExplosionForce(explosionMagnitude, transform.position, explosionRadius);
 
         // Spawn an explosion object
-        Instantiate(explosion);
+        Instantiate(explosion, transform.position, Quaternion.identity);
 
         // Disable the game object
         gameObject.SetActive(false);
@@ -55,7 +55,6 @@ public class ExplosiveBarrel : MoveableObject
 
     public override void SetPlayMode(bool play)
     {
-        Debug.Log(play);///
         playMode = play;
 
         // Wake up the barrel if we're starting play mode
