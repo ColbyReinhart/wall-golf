@@ -13,7 +13,8 @@ public class ExplosiveBarrel : MoveableObject
     private Rigidbody ballRb;
     private bool playMode = false;
     private Rigidbody rb;
-    private Transform startingTransform;
+    private Vector3 startingPositon;
+    private Quaternion startingRotation;
 
     private void Awake()
     {
@@ -21,7 +22,8 @@ public class ExplosiveBarrel : MoveableObject
         highlightFactor = 1.05f;
         rb = GetComponent<Rigidbody>();
         ballRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
-        startingTransform = transform;
+        startingPositon = transform.position;
+        startingRotation = transform.rotation;
     }
 
     private void Update()
@@ -62,12 +64,13 @@ public class ExplosiveBarrel : MoveableObject
         if (playMode)
         {
             rb.WakeUp();
-            startingTransform = transform;
+            startingPositon = transform.position;
+            startingRotation = transform.rotation;
         }
         else
         {
-            transform.position = startingTransform.position;
-            transform.rotation = startingTransform.rotation;
+            transform.position = startingPositon;
+            transform.rotation = startingRotation;
         }
     }
 }

@@ -168,6 +168,11 @@ PrefabInstance:
       objectReference: {fileID: 395508938}
     - target: {fileID: 3276012990338161052, guid: c0c542a0624937546b42d2a435c9ad15,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276012990338161052, guid: c0c542a0624937546b42d2a435c9ad15,
+        type: 3}
       propertyPath: inputController
       value: 
       objectReference: {fileID: 1222160068}
