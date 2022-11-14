@@ -65,7 +65,7 @@ public class MoveableObjController : MonoBehaviour
         // are active.
         foreach (MoveableObject obj in allMoveables)
         {
-            Debug.Log(obj.gameObject.name);
+            ///Debug.Log(obj.gameObject.name);///
             obj.gameObject.SetActive(true);
             obj.SetPlayMode(playMode);
         }
