@@ -37,7 +37,10 @@ public class ExplosiveBarrel : MoveableObject
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > explosionVelocity && playMode)
+        // If we hit something bouncy (when impulse > relativeVelocity), we don't
+        // want to explode the barrel
+        if (collision.impulse.magnitude <= collision.relativeVelocity.magnitude
+            && collision.relativeVelocity.magnitude > explosionVelocity && playMode)
         {
             Explode();
         }
