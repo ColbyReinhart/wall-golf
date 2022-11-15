@@ -46,4 +46,9 @@ public class LevelLoader : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void LoadTestLevel()
+    {
+        SceneManager.LoadScene("TestLevel");
+    }
 }
