@@ -22,12 +22,12 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    public static void Load(int whatLevel)
+    public void Load(int whatLevel)
     {
         SceneManager.LoadScene("Level" + whatLevel);
     }
 
-    public static void LoadTitleScreen()
+    public void LoadTitleScreen()
     {
         SceneManager.LoadScene("TitleScreen");
     }
