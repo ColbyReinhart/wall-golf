@@ -5,6 +5,13 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
     public MoveableObjController moveableObjController;
+    public const float rotateFactor = 5f;
+
+    private Vector3 mousePos;
+    private Vector3 prevMousePos;
+    private MoveableObject pointedObj;
+    private MoveableObject selectedObj;
+    private bool playMode = false;
 
     // Start is called before the first frame update
     void Start()
@@ -96,11 +103,4 @@ public class InputController : MonoBehaviour
     {
         return mousePos - prevMousePos;
     }
-
-    private Vector3 mousePos;
-    private Vector3 prevMousePos;
-    private MoveableObject pointedObj;
-    private MoveableObject selectedObj;
-    private bool playMode = false;
-    private const float rotateFactor = 5f;
 }
