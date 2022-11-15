@@ -5,9 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-    public void Load(int whatLevel)
+    public int totalLevels = 3; // How many levels are there?
+    public int currentLevel = 0;
+
+    public void NextLevel()
+    {
+        ++currentLevel;
+
+        if (currentLevel <= totalLevels)
+        {
+            SceneManager.LoadScene("Level" + currentLevel);
+        }
+        else
+        {
+            LoadTitleScreen();
+        }
+    }
+
+    public static void Load(int whatLevel)
     {
         SceneManager.LoadScene("Level" + whatLevel);
+    }
+
+    public static void LoadTitleScreen()
+    {
+        SceneManager.LoadScene("TitleScreen");
     }
 
     public void LoadLevelSelect()
