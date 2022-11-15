@@ -22,6 +22,11 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
+    public void PlayAgain()
+    {
+        Load(currentLevel);
+    }
+
     public void Load(int whatLevel)
     {
         SceneManager.LoadScene("Level" + whatLevel);
