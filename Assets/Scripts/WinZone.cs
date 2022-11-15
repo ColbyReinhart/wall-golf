@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class WinZone : MonoBehaviour
 {
+    public PanelController panelController;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("You won! :D");
+            // The player shouldn't be able to interact with the
+            // level after they win.
+            GameObject.Find("InputController").SetActive(false);
+
+            panelController.OpenLevelClearPanel();
         }
     }
 }

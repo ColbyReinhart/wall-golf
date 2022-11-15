@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveableObject : MonoBehaviour
 {
-    public GameObject player;
     public Material highlightMat;
     public GameObject inputController;
 
