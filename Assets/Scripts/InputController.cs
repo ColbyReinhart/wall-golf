@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    public GameObject moveableObjController;
+    public MoveableObjController moveableObjController;
 
     // Start is called before the first frame update
     void Start()
@@ -81,7 +81,7 @@ public class InputController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             playMode = !playMode;
-            moveableObjController.GetComponent<MoveableObjController>().SetPlayMode(playMode);
+            moveableObjController.SetPlayMode(playMode);
 
             // Deselect the currently selected object
             if (selectedObj != null)
