@@ -13,13 +13,17 @@ public class MoveableObjController : MonoBehaviour
     }
 
     private GameObject ball;
+    private Rigidbody ballRb;
+    private Collider ballCol;
+    private MoveableObject[] allMoveables;
 
     // Start is called before the first frame update
     void Start()
     {
-        // First, get the ball and tell it to sit still
+        // Get references to the ball
         ball = GameObject.FindGameObjectWithTag("Player");
-        SetPlayMode(false);
+        ballRb = ball.GetComponent<Rigidbody>();
+        ballCol = ball.GetComponent<Collider>();
 
         // Get world coordinate bounds using screen dimensions
         Vector3 bottomLeftBounds = Camera.main.ScreenToWorldPoint(Vector3.zero);
@@ -30,28 +34,40 @@ public class MoveableObjController : MonoBehaviour
         bounds.width = topRightBounds.x - bottomLeftBounds.x;
         bounds.height = topRightBounds.y - bottomLeftBounds.y;
 
+        // Gather all moveable objects
+        allMoveables = GetComponentsInChildren<MoveableObject>();
+
         // Set the world bounds for each moveable object
-        foreach (MoveableObject obj in GetComponentsInChildren<MoveableObject>())
+        foreach (MoveableObject obj in allMoveables)
         {
             obj.SetWorldBounds(bounds);
         }
+
+        SetPlayMode(false);
     }
 
     public void SetPlayMode(bool playMode)
     {
         // Toggle ball physics
-        Rigidbody ballRb = ball.GetComponent<Rigidbody>();
         ballRb.useGravity = playMode;
         ballRb.velocity = Vector3.zero;
 
         // Toggle ball collision
-        Collider ballCol = ball.GetComponent<Collider>();
         ballCol.enabled = playMode;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Reset the ball's position when entering edit mode
+        if (!playMode)
+        {
+            ball.GetComponent<Player>().resetPosition();
+        }
+
+        // Set play mode for all moveable objects and make sure they
+        // are active.
+        foreach (MoveableObject obj in allMoveables)
+        {
+            ///Debug.Log(obj.gameObject.name);///
+            obj.gameObject.SetActive(true);
+            obj.SetPlayMode(playMode);
+        }
     }
 }

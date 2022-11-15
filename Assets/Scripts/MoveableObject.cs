@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class MoveableObject : MonoBehaviour
 {
-    public GameObject player;
     public Material highlightMat;
     public GameObject inputController;
+
+    private bool isSelected;
+    private GameObject highlight;
+    private MoveableObjController.WorldBounds bounds;
+    protected float highlightFactor = 1.05f;
 
     // We achieve highlighting without having to mess with shaders
     // through this hack. A highlight is just a copy of the object
@@ -18,6 +22,7 @@ public class MoveableObject : MonoBehaviour
         // Make a new empty game object which is a child of the moveable object
         highlight = new GameObject();
         highlight.transform.SetParent(this.transform);
+        Debug.Assert(highlight.transform.parent == this.transform);
 
         // Make it the same shape as the parent, with the "highlight" material
         highlight.AddComponent<MeshRenderer>();
@@ -40,11 +45,7 @@ public class MoveableObject : MonoBehaviour
 
         // The highlight won't initially appear
         highlight.SetActive(false);
-    }
-
-    void Update()
-    {
-
+        Debug.Assert(highlight.transform.parent == this.transform);
     }
 
     private void OnMouseDrag()
@@ -90,8 +91,6 @@ public class MoveableObject : MonoBehaviour
         bounds.height = worldBounds.height - transform.localScale.y;
     }
 
-    private bool isSelected;
-    private GameObject highlight;
-    private MoveableObjController.WorldBounds bounds;
-    protected float highlightFactor = 1.05f;
+    // Override this if your object needs to do something special when toggling modes
+    public virtual void SetPlayMode(bool play) { }
 }

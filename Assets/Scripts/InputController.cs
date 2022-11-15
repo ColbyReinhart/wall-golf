@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    public GameObject moveableObjController;
+    public MoveableObjController moveableObjController;
+    public PanelController panelController;
+    public const float rotateFactor = 5f;
+
+    private Vector3 mousePos;
+    private Vector3 prevMousePos;
+    private MoveableObject pointedObj;
+    private MoveableObject selectedObj;
+    private bool playMode = false;
+    private bool paused = false;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +25,14 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If the user hits the escape key
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+
+        if (paused) return;
+
         // Update mouse position
         prevMousePos = mousePos;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -80,15 +97,7 @@ public class InputController : MonoBehaviour
         // If the user hits the spacebar, tell the object controller to switch modes
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            playMode = !playMode;
-            moveableObjController.GetComponent<MoveableObjController>().SetPlayMode(playMode);
-
-            // Deselect the currently selected object
-            if (selectedObj != null)
-            {
-                selectedObj.Deselect();
-                selectedObj = null;
-            }
+            ToggleMode();
         }
     }
 
@@ -97,10 +106,32 @@ public class InputController : MonoBehaviour
         return mousePos - prevMousePos;
     }
 
-    private Vector3 mousePos;
-    private Vector3 prevMousePos;
-    private MoveableObject pointedObj;
-    private MoveableObject selectedObj;
-    private bool playMode = false;
-    private const float rotateFactor = 5f;
+    // Toggle between build and play mode
+    public void ToggleMode()
+    {
+        playMode = !playMode;
+        moveableObjController.SetPlayMode(playMode);
+
+        // Deselect the currently selected object
+        if (selectedObj != null)
+        {
+            selectedObj.Deselect();
+            selectedObj = null;
+        }
+    }
+
+    public void TogglePause()
+    {
+        paused = !paused;
+
+        // Toggle pause menu
+        panelController.TogglePausePanel(paused);
+
+        // If we paused while the game is in play mode,
+        // switch back to build mode
+        if (paused && playMode)
+        {
+            ToggleMode();
+        }
+    }
 }
