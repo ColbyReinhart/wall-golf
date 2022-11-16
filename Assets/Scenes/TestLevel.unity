@@ -127,7 +127,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 65896979060741351}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 --- !u!54 &395508943
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -250,15 +249,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 537504405}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-=======
->>>>>>> master
 --- !u!1 &1222160068 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7767243280387898117, guid: 776d3d6c0be669b46977798fd99bdc9a,
     type: 3}
   m_PrefabInstance: {fileID: 2785144153766209890}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 --- !u!1 &1652691603
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,11 +366,6 @@ MonoBehaviour:
 --- !u!1 &2140049372 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8782491647474608178, guid: c9b9305b178d0e7429ba18803cfdcbf1,
-=======
---- !u!114 &1484936543 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3974337247453227021, guid: 2fe0ebd593735bd44aaa82e00af535dc,
->>>>>>> master
     type: 3}
   m_PrefabInstance: {fileID: 6067003535031574036}
   m_PrefabAsset: {fileID: 0}
@@ -618,7 +609,6 @@ PrefabInstance:
         type: 3}
       propertyPath: panelController
       value: 
-      objectReference: {fileID: 1484936543}
     - target: {fileID: 2782044421130341932, guid: 776d3d6c0be669b46977798fd99bdc9a,
         type: 3}
       propertyPath: moveableObjController
@@ -1283,7 +1273,6 @@ PrefabInstance:
         type: 3}
       propertyPath: panelController
       value: 
-      objectReference: {fileID: 1484936543}
     - target: {fileID: 8238306875100218598, guid: 4ad3d75e65599ba42a8f29f2e5015ff6,
         type: 3}
       propertyPath: m_Name
