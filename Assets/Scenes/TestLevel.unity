@@ -383,7 +383,7 @@ PrefabInstance:
         type: 3}
       propertyPath: panelController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6067003535031574037}
     - target: {fileID: 2782044421130341932, guid: 776d3d6c0be669b46977798fd99bdc9a,
         type: 3}
       propertyPath: moveableObjController
@@ -826,6 +826,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1677956795631440922, guid: 2fe0ebd593735bd44aaa82e00af535dc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1626293616}
     - target: {fileID: 3939928212616565293, guid: 2fe0ebd593735bd44aaa82e00af535dc,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -923,6 +928,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fe0ebd593735bd44aaa82e00af535dc, type: 3}
+--- !u!114 &6067003535031574037 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3974337247453227021, guid: 2fe0ebd593735bd44aaa82e00af535dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 6067003535031574036}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cbb1fcee5ab38c429fc7c13326898f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6526744838723254586
 PrefabInstance:
   m_ObjectHideFlags: 0
