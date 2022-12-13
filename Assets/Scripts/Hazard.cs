@@ -10,18 +10,21 @@ public class Hazard : MonoBehaviour
     private void Start()
     {
         panelController = GameObject.Find("MenuCanvas").GetComponent<PanelController>();
-
-        if (panelController == null)
-        {
-            Debug.LogError("Hazard could not find PanelController in MenuCanvas!");
-        }
+        Debug.Assert(panelController != null);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // panelController likes to randomly go null, so we have to do this.
+        if (panelController == null)
+        {
+            Start();
+        }
+
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.SetActive(false);
+            Debug.Assert(panelController != null);
             panelController.OpenGameOverPanel();
         }
     }

@@ -1022,6 +1022,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6526744839260672941, guid: d1305f6a53fd17944b9328adb68685c3,
+        type: 3}
+      propertyPath: panelController
+      value: 
+      objectReference: {fileID: 6067003535031574037}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1305f6a53fd17944b9328adb68685c3, type: 3}
 --- !u!1001 &7541421553144432761

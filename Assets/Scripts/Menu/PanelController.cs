@@ -8,26 +8,17 @@ public class PanelController : MonoBehaviour
     private GameObject pausePanel;
     private GameObject gameOverPanel;
 
-    void Start()
+    private void Start()
     {
         // Get panels
-        levelClearPanel = GameObject.Find("LevelClearPanel");
-        pausePanel = GameObject.Find("PausePanel");
-        gameOverPanel = GameObject.Find("GameOverPanel");
+        levelClearPanel = transform.Find("LevelClearPanel").gameObject;
+        pausePanel = transform.Find("PausePanel").gameObject;
+        gameOverPanel = transform.Find("GameOverPanel").gameObject;
 
         // Validate references
-        if (levelClearPanel == null)
-        {
-            Debug.LogError("Could not find LevelClearPanel in LevelClearPanel");
-        }
-        if (pausePanel == null)
-        {
-            Debug.LogError("Could not find PausePanel in PausePanel");
-        }
-        if (gameOverPanel == null)
-        {
-            Debug.LogError("Could not find GameOverPanel in GameOverPanel");
-        }
+        Debug.Assert(levelClearPanel != null);
+        Debug.Assert(pausePanel != null);
+        Debug.Assert(gameOverPanel != null);
 
         // Set panels to inactive
         levelClearPanel.SetActive(false);
