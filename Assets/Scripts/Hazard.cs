@@ -23,8 +23,9 @@ public class Hazard : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.SetActive(false);
-            panelController.OpenGameOverPanel();
+            // It's easier to just teleport the ball away than disable it
+            other.transform.position = new Vector3(0, -100, 0);
+            panelController.ToggleGameOverPanel(true);
         }
     }
 }

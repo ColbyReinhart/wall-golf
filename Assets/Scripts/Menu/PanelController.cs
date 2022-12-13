@@ -38,10 +38,9 @@ public class PanelController : MonoBehaviour
         levelClearPanel.SetActive(true);
     }
 
-    public void OpenGameOverPanel()
+    public void ToggleGameOverPanel(bool gameOver)
     {
-        Debug.Log("Test");
-        gameOverPanel.SetActive(true);
+        gameOverPanel.SetActive(gameOver);
     }
 
     public void TogglePausePanel(bool paused)

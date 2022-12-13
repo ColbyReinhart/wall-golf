@@ -118,6 +118,9 @@ public class InputController : MonoBehaviour
             selectedObj.Deselect();
             selectedObj = null;
         }
+
+        // Make sure the game over menu goes away
+        panelController.ToggleGameOverPanel(false);
     }
 
     public void TogglePause()
