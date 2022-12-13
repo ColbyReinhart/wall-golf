@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 
-public class Laser : MonoBehaviour
+public class Laser : Hazard
 {
     MeshRenderer laserTexture;
     BoxCollider laserHitbox;
@@ -24,7 +24,6 @@ public class Laser : MonoBehaviour
     void Update()
     {
         if (Input.GetButtonDown("Space")) { beginLaser = !beginLaser; }
-        Debug.Log(beginLaser);
         if (beginLaser == true) {
             lst -= Time.deltaTime;
             double switchTime = Math.Ceiling(lst);
@@ -36,13 +35,5 @@ public class Laser : MonoBehaviour
                 laserHitbox.enabled = OnOff;
             }
         } else { laserTexture.enabled = true; laserHitbox.enabled = true; }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        //if the player collides with the laser destroy it
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.gameObject.SetActive(false);
-        }
     }
 }
