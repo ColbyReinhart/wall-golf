@@ -31,7 +31,7 @@ public class InputController : MonoBehaviour
             TogglePause();
         }
 
-        if (paused) return;
+        if (paused || panelController.IsMenuActive()) return;
 
         // Update mouse position
         prevMousePos = mousePos;

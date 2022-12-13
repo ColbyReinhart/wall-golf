@@ -24,7 +24,6 @@ public class Hazard : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.SetActive(false);
-            Debug.Assert(panelController != null);
             panelController.OpenGameOverPanel();
         }
     }

@@ -26,6 +26,13 @@ public class PanelController : MonoBehaviour
         gameOverPanel.SetActive(false);
     }
 
+    public bool IsMenuActive()
+    {
+        return levelClearPanel.activeInHierarchy
+            || pausePanel.activeInHierarchy
+            || gameOverPanel.activeInHierarchy;
+    }
+
     public void OpenLevelClearPanel()
     {
         levelClearPanel.SetActive(true);
