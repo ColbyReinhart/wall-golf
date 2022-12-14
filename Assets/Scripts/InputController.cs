@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    public MoveableObjController moveableObjController;
-    public PanelController panelController;
+    private MoveableObjController moveableObjController;
+    private PanelController panelController;
     public const float rotateFactor = 5f;
 
     private Vector3 mousePos;
@@ -18,8 +18,12 @@ public class InputController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize references
         pointedObj = null;
         selectedObj = null;
+
+        moveableObjController = GameObject.Find("MoveableObjController").GetComponent<MoveableObjController>();
+        panelController = GameObject.Find("MenuCanvas").GetComponent<PanelController>();
     }
 
     // Update is called once per frame
@@ -31,7 +35,7 @@ public class InputController : MonoBehaviour
             TogglePause();
         }
 
-        if (paused) return;
+        if (paused || panelController.IsMenuActive()) return;
 
         // Update mouse position
         prevMousePos = mousePos;
@@ -118,6 +122,9 @@ public class InputController : MonoBehaviour
             selectedObj.Deselect();
             selectedObj = null;
         }
+
+        // Make sure the game over menu goes away
+        panelController.ToggleGameOverPanel(false);
     }
 
     public void TogglePause()

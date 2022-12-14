@@ -12,19 +12,12 @@ public class MoveableObjController : MonoBehaviour
         public float height;
     }
 
-    private GameObject ball;
-    private Rigidbody ballRb;
-    private Collider ballCol;
+    private Player player;
     private MoveableObject[] allMoveables;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Get references to the ball
-        ball = GameObject.FindGameObjectWithTag("Player");
-        ballRb = ball.GetComponent<Rigidbody>();
-        ballCol = ball.GetComponent<Collider>();
-
         // Get world coordinate bounds using screen dimensions
         Vector3 bottomLeftBounds = Camera.main.ScreenToWorldPoint(Vector3.zero);
         Vector3 topRightBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
@@ -34,7 +27,8 @@ public class MoveableObjController : MonoBehaviour
         bounds.width = topRightBounds.x - bottomLeftBounds.x;
         bounds.height = topRightBounds.y - bottomLeftBounds.y;
 
-        // Gather all moveable objects
+        // Assign references
+        player = GameObject.FindObjectOfType<Player>();
         allMoveables = GetComponentsInChildren<MoveableObject>();
 
         // Set the world bounds for each moveable object
@@ -48,24 +42,13 @@ public class MoveableObjController : MonoBehaviour
 
     public void SetPlayMode(bool playMode)
     {
-        // Toggle ball physics
-        ballRb.useGravity = playMode;
-        ballRb.velocity = Vector3.zero;
-
-        // Toggle ball collision
-        ballCol.enabled = playMode;
-
         // Reset the ball's position when entering edit mode
-        if (!playMode)
-        {
-            ball.GetComponent<Player>().resetPosition();
-        }
+        player.resetPosition(playMode);
 
         // Set play mode for all moveable objects and make sure they
         // are active.
         foreach (MoveableObject obj in allMoveables)
         {
-            ///Debug.Log(obj.gameObject.name);///
             obj.gameObject.SetActive(true);
             obj.SetPlayMode(playMode);
         }

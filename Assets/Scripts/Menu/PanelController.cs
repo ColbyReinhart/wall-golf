@@ -6,21 +6,41 @@ public class PanelController : MonoBehaviour
 {
     private GameObject levelClearPanel;
     private GameObject pausePanel;
+    private GameObject gameOverPanel;
 
-    void Start()
+    private void Start()
     {
         // Get panels
-        levelClearPanel = GameObject.Find("LevelClearPanel");
-        pausePanel = GameObject.Find("PausePanel");
+        levelClearPanel = transform.Find("LevelClearPanel").gameObject;
+        pausePanel = transform.Find("PausePanel").gameObject;
+        gameOverPanel = transform.Find("GameOverPanel").gameObject;
+
+        // Validate references
+        Debug.Assert(levelClearPanel != null);
+        Debug.Assert(pausePanel != null);
+        Debug.Assert(gameOverPanel != null);
 
         // Set panels to inactive
         levelClearPanel.SetActive(false);
         pausePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+    }
+
+    public bool IsMenuActive()
+    {
+        return levelClearPanel.activeInHierarchy
+            || pausePanel.activeInHierarchy
+            || gameOverPanel.activeInHierarchy;
     }
 
     public void OpenLevelClearPanel()
     {
         levelClearPanel.SetActive(true);
+    }
+
+    public void ToggleGameOverPanel(bool gameOver)
+    {
+        gameOverPanel.SetActive(gameOver);
     }
 
     public void TogglePausePanel(bool paused)
