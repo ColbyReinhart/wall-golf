@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveableObject : MonoBehaviour
 {
     public Material highlightMat;
-    public GameObject inputController;
+    private InputController inputController;
 
     private bool isSelected;
     private GameObject highlight;
@@ -19,6 +19,9 @@ public class MoveableObject : MonoBehaviour
     // the actual MoveableObject so that it follows the MoveableObject.
     void Start()
     {
+        // Get inputController reference
+        inputController = GameObject.Find("InputController").GetComponent<InputController>();
+
         // Make a new empty game object which is a child of the moveable object
         highlight = new GameObject();
         highlight.transform.SetParent(this.transform);
@@ -53,7 +56,7 @@ public class MoveableObject : MonoBehaviour
         if (isSelected)
         {
             // Get the position of where the object is to be moved
-            Vector3 newPos = transform.position + inputController.GetComponent<InputController>().getMouseDelta();
+            Vector3 newPos = transform.position + inputController.getMouseDelta();
 
             // Make sure this is within legal bounds
             if (newPos.x > bounds.bottomLeftX + bounds.width) newPos.x = bounds.bottomLeftX + bounds.width;
