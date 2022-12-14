@@ -31,7 +31,7 @@ public class InputController : MonoBehaviour
             TogglePause();
         }
 
-        if (paused) return;
+        if (paused || panelController.IsMenuActive()) return;
 
         // Update mouse position
         prevMousePos = mousePos;
@@ -118,6 +118,9 @@ public class InputController : MonoBehaviour
             selectedObj.Deselect();
             selectedObj = null;
         }
+
+        // Make sure the game over menu goes away
+        panelController.ToggleGameOverPanel(false);
     }
 
     public void TogglePause()
