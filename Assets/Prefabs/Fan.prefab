@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 5004517426057003627}
   - component: {fileID: 5004517426057003626}
   - component: {fileID: 5004517426057003624}
-  - component: {fileID: 5004517426057003540}
+  - component: {fileID: 6068705210837180440}
   m_Layer: 0
   m_Name: Fan
   m_TagString: Untagged
@@ -257,7 +257,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5004517426057003540
+--- !u!114 &6068705210837180440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,9 +266,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5004517426057003631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13c01afd563225c4fac3497285afc7c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ac69dc513a12ed42998703100f3b3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  highlightMat: {fileID: 2100000, guid: b01aeea9fd292a748b3a11f028e532aa, type: 2}
-  inputController: {fileID: 0}
+  highlight: {fileID: 0}

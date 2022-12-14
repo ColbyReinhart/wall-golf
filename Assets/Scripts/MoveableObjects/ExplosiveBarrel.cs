@@ -19,7 +19,6 @@ public class ExplosiveBarrel : MoveableObject
     private void Awake()
     {
         // Initialize variables
-        highlightFactor = 1.05f;
         rb = GetComponent<Rigidbody>();
         ballRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
         startingPositon = transform.position;

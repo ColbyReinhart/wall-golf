@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3663801191710589561}
   - component: {fileID: 3663801191710589562}
   - component: {fileID: 3663801191710589563}
-  - component: {fileID: 3663801191710589564}
+  - component: {fileID: 3030495297814709692}
   m_Layer: 0
   m_Name: Trampoline
   m_TagString: Untagged
@@ -94,7 +94,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3663801191710589564
+--- !u!114 &3030495297814709692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,9 +103,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3663801191710589565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4615a4395c0600e41aef569f7591495b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ac69dc513a12ed42998703100f3b3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  highlightMat: {fileID: 2100000, guid: b01aeea9fd292a748b3a11f028e532aa, type: 2}
-  inputController: {fileID: 0}
+  highlight: {fileID: 0}
