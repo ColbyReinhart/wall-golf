@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    public MoveableObjController moveableObjController;
-    public PanelController panelController;
+    private MoveableObjController moveableObjController;
+    private PanelController panelController;
     public const float rotateFactor = 5f;
 
     private Vector3 mousePos;
@@ -18,8 +18,12 @@ public class InputController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize references
         pointedObj = null;
         selectedObj = null;
+
+        moveableObjController = GameObject.Find("MoveableObjController").GetComponent<MoveableObjController>();
+        panelController = GameObject.Find("MenuCanvas").GetComponent<PanelController>();
     }
 
     // Update is called once per frame
