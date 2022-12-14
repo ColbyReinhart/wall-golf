@@ -19,7 +19,6 @@ public class ExplosiveBarrel : MoveableObject
     private void Awake()
     {
         // Initialize variables
-        highlightFactor = 1.05f;
         rb = GetComponent<Rigidbody>();
         ballRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
         startingPositon = transform.position;
@@ -37,9 +36,8 @@ public class ExplosiveBarrel : MoveableObject
 
     private void OnCollisionEnter(Collision collision)
     {
-        // If we hit something bouncy (when impulse > relativeVelocity), we don't
-        // want to explode the barrel
-        if (collision.impulse.magnitude <= collision.relativeVelocity.magnitude
+        // If we hit something bouncy, we don't want to explode the barrel
+        if (collision.collider.material.bounceCombine != PhysicMaterialCombine.Maximum
             && collision.relativeVelocity.magnitude > explosionVelocity && playMode)
         {
             Explode();
