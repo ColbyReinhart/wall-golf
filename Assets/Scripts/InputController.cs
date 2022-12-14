@@ -6,7 +6,7 @@ public class InputController : MonoBehaviour
 {
     private MoveableObjController moveableObjController;
     private PanelController panelController;
-    public const float rotateFactor = 5f;
+    public float rotateFactor = 5f;
 
     private Vector3 mousePos;
     private Vector3 prevMousePos;
@@ -37,9 +37,10 @@ public class InputController : MonoBehaviour
 
         if (paused || panelController.IsMenuActive()) return;
 
-        // Update mouse position
+        // Update mouse data
         prevMousePos = mousePos;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float scrollDelta = Input.mouseScrollDelta.y;
 
         if (Input.GetMouseButtonDown(0) && !playMode)
         {
@@ -82,18 +83,22 @@ public class InputController : MonoBehaviour
                 }
             }
         }
-
-        // Check for arrow key inputs
+        
+        // Check for rotation inputs
         if (selectedObj != null)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            Quaternion rot = selectedObj.gameObject.transform.rotation;
+
+            if (scrollDelta != 0)
             {
-                Quaternion rot = selectedObj.gameObject.transform.rotation;
+                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, rot.z + Mathf.Round(scrollDelta * rotateFactor));
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
                 selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z + rotateFactor));
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                Quaternion rot = selectedObj.gameObject.transform.rotation;
                 selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z - rotateFactor));
             }
         }
