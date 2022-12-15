@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
+    // Component references
     private MoveableObjController moveableObjController;
     private PanelController panelController;
-    public const float rotateFactor = 5f;
 
+    // Rotation
+    public float rotationInterval = 5f;         // Objects rotation this many degrees at a time
+    public float holdToRotateDelay = 0.5f;      // How many seconds until hold rotation kicks in?
+    public float timeBetweenRotations = 0.05f;  // How many seconds per rotation when holding?
+    private float lastRotationTime = 0;         // When did the last rotation happen?
+    private float rightArrowHoldDuration = 0;   // How long has the right arrow key been held?
+    private float leftArrowHoldDuration = 0;    // How long has the left arrow key been held?
+
+    // Object selection
     private Vector3 mousePos;
     private Vector3 prevMousePos;
     private MoveableObject pointedObj;
     private MoveableObject selectedObj;
+
+    // Misc
     private bool playMode = false;
     private bool paused = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         // Initialize references
@@ -26,20 +36,25 @@ public class InputController : MonoBehaviour
         panelController = GameObject.Find("MenuCanvas").GetComponent<PanelController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Don't allow user input if a menu is active
+        if (panelController.IsMenuActive()) return;
+
         // If the user hits the escape key
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
         }
 
-        if (paused || panelController.IsMenuActive()) return;
-
-        // Update mouse position
+        // Update mouse data
         prevMousePos = mousePos;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float scrollDelta = Input.mouseScrollDelta.y;
+
+        //
+        // Object selection
+        //
 
         if (Input.GetMouseButtonDown(0) && !playMode)
         {
@@ -82,20 +97,74 @@ public class InputController : MonoBehaviour
                 }
             }
         }
+        
+        //
+        // Rotation
+        //
 
-        // Check for arrow key inputs
+        // We only care about this if a moveable object is selected
         if (selectedObj != null)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            Quaternion rot = selectedObj.gameObject.transform.rotation;
+            bool leftArrowPressed = false;
+            bool rightArrowPressed = false;
+
+            // If the user is using the scroll wheel, prioritize that
+            if (scrollDelta != 0)
             {
-                Quaternion rot = selectedObj.gameObject.transform.rotation;
-                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z + rotateFactor));
+                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, rot.z + Mathf.Round(scrollDelta * rotationInterval));
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
+
+            // Otherwise, listen for arrow key inputs
+            else if (Input.GetKey(KeyCode.LeftArrow))
             {
-                Quaternion rot = selectedObj.gameObject.transform.rotation;
-                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z - rotateFactor));
+                leftArrowPressed = true;
+
+                // If we just started holding down this key, move it once
+                if (leftArrowHoldDuration == 0)
+                {
+                    selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z + rotationInterval));
+                }
+
+                // Increment time held
+                leftArrowHoldDuration += Time.deltaTime;
+
+                // If we've held it long enough, start rotataing it 
+                if (leftArrowHoldDuration >= holdToRotateDelay)
+                {
+                    if (Time.realtimeSinceStartup >= lastRotationTime + timeBetweenRotations)
+                    {
+                        selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z + rotationInterval));
+                        lastRotationTime = Time.realtimeSinceStartup;
+                    }
+                }
             }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                rightArrowPressed = true;
+
+                // If we just started holding down this key, move it once
+                if (rightArrowHoldDuration == 0)
+                {
+                    selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z - rotationInterval));
+                }
+
+                // Increment time held
+                rightArrowHoldDuration += Time.deltaTime;
+
+                // If we've held it long enough, start rotataing it 
+                if (rightArrowHoldDuration >= holdToRotateDelay)
+                {
+                    if (Time.realtimeSinceStartup >= lastRotationTime + timeBetweenRotations)
+                    {
+                        selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z - rotationInterval));
+                        lastRotationTime = Time.realtimeSinceStartup;
+                    }
+                }
+            }
+
+            if (!leftArrowPressed) leftArrowHoldDuration = 0;
+            if (!rightArrowPressed) rightArrowHoldDuration = 0;
         }
 
         // If the user hits the spacebar, tell the object controller to switch modes
@@ -103,6 +172,12 @@ public class InputController : MonoBehaviour
         {
             ToggleMode();
         }
+    }
+
+    // Helper method to get the nearest multiple of rotationInterval
+    private float GetNearestIntervalRot(float rot)
+    {
+        return Mathf.Round(rot / rotationInterval) * rotationInterval;
     }
 
     public Vector3 getMouseDelta()
@@ -127,6 +202,7 @@ public class InputController : MonoBehaviour
         panelController.ToggleGameOverPanel(false);
     }
 
+    // Toggle the pause menu
     public void TogglePause()
     {
         paused = !paused;
