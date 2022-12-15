@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
+    // Component references
     private MoveableObjController moveableObjController;
     private PanelController panelController;
-    public float rotateFactor = 5f;
 
+    // Rotation
+    public float rotationInterval = 5f;         // Objects rotation this many degrees at a time
+    private float rightArrowHoldDuration = 0;   // How long has the right arrow key been held?
+    private float leftArrowHoldDuration = 0;    // How long has the left arrow key been held?
+
+    // Object selection
     private Vector3 mousePos;
     private Vector3 prevMousePos;
     private MoveableObject pointedObj;
     private MoveableObject selectedObj;
+
+    // Misc
     private bool playMode = false;
     private bool paused = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         // Initialize references
@@ -26,21 +33,25 @@ public class InputController : MonoBehaviour
         panelController = GameObject.Find("MenuCanvas").GetComponent<PanelController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Don't allow user input if a menu is active
+        if (panelController.IsMenuActive()) return;
+
         // If the user hits the escape key
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
         }
 
-        if (paused || panelController.IsMenuActive()) return;
-
         // Update mouse data
         prevMousePos = mousePos;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float scrollDelta = Input.mouseScrollDelta.y;
+
+        //
+        // Object selection
+        //
 
         if (Input.GetMouseButtonDown(0) && !playMode)
         {
@@ -84,15 +95,24 @@ public class InputController : MonoBehaviour
             }
         }
         
-        // Check for rotation inputs
+        //
+        // Rotation
+        //
+
+        // We only care about this if a moveable object is selected
         if (selectedObj != null)
         {
+
+            // Get the current rotation of the object
             Quaternion rot = selectedObj.gameObject.transform.rotation;
 
+            // If the user is using the scroll wheel, prioritize that
             if (scrollDelta != 0)
             {
-                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, rot.z + Mathf.Round(scrollDelta * rotateFactor));
+                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, rot.z + Mathf.Round(scrollDelta * rotationInterval));
             }
+
+            // Otherwise, listen for arrow key inputs
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z + rotateFactor));
@@ -132,6 +152,7 @@ public class InputController : MonoBehaviour
         panelController.ToggleGameOverPanel(false);
     }
 
+    // Toggle the pause menu
     public void TogglePause()
     {
         paused = !paused;
