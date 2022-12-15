@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a566a27359217944c84229fab7d14805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationInterval: 5
+  holdToRotateDelay: 0.5
+  timeBetweenRotations: 0.05

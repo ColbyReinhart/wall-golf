@@ -10,6 +10,9 @@ public class InputController : MonoBehaviour
 
     // Rotation
     public float rotationInterval = 5f;         // Objects rotation this many degrees at a time
+    public float holdToRotateDelay = 0.5f;      // How many seconds until hold rotation kicks in?
+    public float timeBetweenRotations = 0.05f;  // How many seconds per rotation when holding?
+    private float lastRotationTime = 0;         // When did the last rotation happen?
     private float rightArrowHoldDuration = 0;   // How long has the right arrow key been held?
     private float leftArrowHoldDuration = 0;    // How long has the left arrow key been held?
 
@@ -102,9 +105,9 @@ public class InputController : MonoBehaviour
         // We only care about this if a moveable object is selected
         if (selectedObj != null)
         {
-
-            // Get the current rotation of the object
             Quaternion rot = selectedObj.gameObject.transform.rotation;
+            bool leftArrowPressed = false;
+            bool rightArrowPressed = false;
 
             // If the user is using the scroll wheel, prioritize that
             if (scrollDelta != 0)
@@ -113,14 +116,55 @@ public class InputController : MonoBehaviour
             }
 
             // Otherwise, listen for arrow key inputs
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (Input.GetKey(KeyCode.LeftArrow))
             {
-                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z + rotateFactor));
+                leftArrowPressed = true;
+
+                // If we just started holding down this key, move it once
+                if (leftArrowHoldDuration == 0)
+                {
+                    selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z + rotationInterval));
+                }
+
+                // Increment time held
+                leftArrowHoldDuration += Time.deltaTime;
+
+                // If we've held it long enough, start rotataing it 
+                if (leftArrowHoldDuration >= holdToRotateDelay)
+                {
+                    if (Time.realtimeSinceStartup >= lastRotationTime + timeBetweenRotations)
+                    {
+                        selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z + rotationInterval));
+                        lastRotationTime = Time.realtimeSinceStartup;
+                    }
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            else if (Input.GetKey(KeyCode.RightArrow))
             {
-                selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z - rotateFactor));
+                rightArrowPressed = true;
+
+                // If we just started holding down this key, move it once
+                if (rightArrowHoldDuration == 0)
+                {
+                    selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z - rotationInterval));
+                }
+
+                // Increment time held
+                rightArrowHoldDuration += Time.deltaTime;
+
+                // If we've held it long enough, start rotataing it 
+                if (rightArrowHoldDuration >= holdToRotateDelay)
+                {
+                    if (Time.realtimeSinceStartup >= lastRotationTime + timeBetweenRotations)
+                    {
+                        selectedObj.gameObject.transform.Rotate(rot.x, rot.y, Mathf.Round(rot.z - rotationInterval));
+                        lastRotationTime = Time.realtimeSinceStartup;
+                    }
+                }
             }
+
+            if (!leftArrowPressed) leftArrowHoldDuration = 0;
+            if (!rightArrowPressed) rightArrowHoldDuration = 0;
         }
 
         // If the user hits the spacebar, tell the object controller to switch modes
@@ -128,6 +172,12 @@ public class InputController : MonoBehaviour
         {
             ToggleMode();
         }
+    }
+
+    // Helper method to get the nearest multiple of rotationInterval
+    private float GetNearestIntervalRot(float rot)
+    {
+        return Mathf.Round(rot / rotationInterval) * rotationInterval;
     }
 
     public Vector3 getMouseDelta()
