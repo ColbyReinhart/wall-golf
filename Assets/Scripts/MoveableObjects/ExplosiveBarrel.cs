@@ -15,23 +15,16 @@ public class ExplosiveBarrel : MoveableObject
     private Rigidbody rb;
     private Vector3 startingPositon;
     private Quaternion startingRotation;
+    private bool inPlayArea = false;
 
     private void Awake()
     {
         // Initialize variables
         rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
         ballRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
         startingPositon = transform.position;
         startingRotation = transform.rotation;
-    }
-
-    private void Update()
-    {
-        // This is the best way to disable the rigidbody
-        if (!playMode)
-        {
-            rb.Sleep();
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -41,6 +34,24 @@ public class ExplosiveBarrel : MoveableObject
             && collision.relativeVelocity.magnitude > explosionVelocity && playMode)
         {
             Explode();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if we're in the playable area or not
+        if (other.gameObject.name == "PlayArea")
+        {
+            inPlayArea = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // Check if we're leaving the playable area or not
+        if (other.gameObject.name == "PlayArea")
+        {
+            inPlayArea = false;
         }
     }
 
@@ -64,14 +75,15 @@ public class ExplosiveBarrel : MoveableObject
         // Also, save or reset the starting transform respectively
         if (playMode)
         {
-            rb.WakeUp();
             startingPositon = transform.position;
             startingRotation = transform.rotation;
+            rb.isKinematic = !inPlayArea;
         }
         else
         {
             transform.position = startingPositon;
             transform.rotation = startingRotation;
+            rb.isKinematic = true;
         }
     }
 }
