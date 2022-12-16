@@ -6,18 +6,11 @@ public class Player : MonoBehaviour
 {
     private Vector3 initialPos;
     private Rigidbody rb;
-    public AudioSource backgroundMusic;
 
     private void Awake()
     {
         initialPos = transform.position;
         rb = GetComponent<Rigidbody>();
-        backgroundMusic = GetComponent<AudioSource>();
-    }
-
-    private void Start()
-    {
-        backgroundMusic.Play();
     }
 
     public void resetPosition(bool playMode)
