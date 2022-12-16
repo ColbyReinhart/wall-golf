@@ -15,6 +15,7 @@ public class ExplosiveBarrel : MoveableObject
     private Rigidbody rb;
     private Vector3 startingPositon;
     private Quaternion startingRotation;
+    private bool inPlayArea = false;
 
     private void Awake()
     {
@@ -36,6 +37,24 @@ public class ExplosiveBarrel : MoveableObject
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if we're in the playable area or not
+        if (other.gameObject.name == "PlayArea")
+        {
+            inPlayArea = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // Check if we're leaving the playable area or not
+        if (other.gameObject.name == "PlayArea")
+        {
+            inPlayArea = false;
+        }
+    }
+
     private void Explode()
     {
         // Do the explosion
@@ -51,20 +70,20 @@ public class ExplosiveBarrel : MoveableObject
     public override void SetPlayMode(bool play)
     {
         playMode = play;
-        rb.isKinematic = !playMode;
 
         // Wake up the barrel if we're starting play mode
         // Also, save or reset the starting transform respectively
         if (playMode)
         {
-            rb.WakeUp();
             startingPositon = transform.position;
             startingRotation = transform.rotation;
+            rb.isKinematic = !inPlayArea;
         }
         else
         {
             transform.position = startingPositon;
             transform.rotation = startingRotation;
+            rb.isKinematic = true;
         }
     }
 }
