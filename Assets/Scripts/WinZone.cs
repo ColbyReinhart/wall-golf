@@ -13,9 +13,10 @@ public class WinZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        collisionSound.Play();
         if (other.CompareTag("Player"))
         {
+            collisionSound.Play();
+
             // Open the level clear panel
             // This only happens once, so we can be lazy about it
             GameObject.Find("MenuCanvas").GetComponent<PanelController>().OpenLevelClearPanel();
