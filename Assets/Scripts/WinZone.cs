@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class WinZone : MonoBehaviour
 {
+    private AudioSource collisionSound;
+
+    private void Awake()
+    {
+        collisionSound = GetComponent<AudioSource>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
+        collisionSound.Play();
         if (other.CompareTag("Player"))
         {
             // Open the level clear panel
@@ -20,4 +28,5 @@ public class WinZone : MonoBehaviour
             }
         }
     }
+
 }

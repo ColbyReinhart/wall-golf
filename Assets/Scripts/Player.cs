@@ -7,12 +7,19 @@ public class Player : MonoBehaviour
     private Vector3 initialPos = new Vector3(0, 0, 0);
     private Rigidbody rb;
     private Collider col;
+    public AudioSource backgroundMusic;
 
     private void Awake()
     {
         initialPos = transform.position;
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+        backgroundMusic = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        backgroundMusic.Play();
     }
 
     public void resetPosition(bool playMode)

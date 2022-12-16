@@ -6,11 +6,13 @@ using UnityEngine;
 public class Hazard : MonoBehaviour
 {
     private PanelController panelController;
+    private AudioSource collisionSound;
 
     private void Start()
     {
         panelController = GameObject.Find("MenuCanvas").GetComponent<PanelController>();
         Debug.Assert(panelController != null);
+        collisionSound = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,6 +28,7 @@ public class Hazard : MonoBehaviour
             // It's easier to just teleport the ball away than disable it
             other.transform.position = new Vector3(0, -100, 0);
             panelController.ToggleGameOverPanel(true);
+            collisionSound.Play();
         }
     }
 }
