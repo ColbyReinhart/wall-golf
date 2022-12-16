@@ -20,18 +20,10 @@ public class ExplosiveBarrel : MoveableObject
     {
         // Initialize variables
         rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
         ballRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
         startingPositon = transform.position;
         startingRotation = transform.rotation;
-    }
-
-    private void Update()
-    {
-        // This is the best way to disable the rigidbody
-        if (!playMode)
-        {
-            rb.Sleep();
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -59,6 +51,7 @@ public class ExplosiveBarrel : MoveableObject
     public override void SetPlayMode(bool play)
     {
         playMode = play;
+        rb.isKinematic = !playMode;
 
         // Wake up the barrel if we're starting play mode
         // Also, save or reset the starting transform respectively
