@@ -25,7 +25,7 @@ public class Laser : Hazard
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Space")) { beginLaser = !beginLaser; }
+        if (Input.GetButtonDown("Space")) { beginLaser = !beginLaser; lst = laserSwitch; OnOff = true; }
         if (beginLaser == true) {
             lst -= Time.deltaTime;
             double switchTime = Math.Ceiling(lst);

@@ -35,4 +35,58 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level7.unity
     guid: 4b9a2106d6fac374f9bf6245376c39c1
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level8.unity
+    guid: c7212179c577cd940bb79ef3e26d482b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level9.unity
+    guid: 972ec5bf2d1cdcb45811e5bed9fa6512
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level10.unity
+    guid: 63f6da1ef3f9a924faef2426494ac064
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level11.unity
+    guid: 42f8200ed073b464ba8abff928294c43
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level12.unity
+    guid: db891b439904bb64aa54735126001c21
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level13.unity
+    guid: 979f1866643a1a246948faddac9afccb
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level14.unity
+    guid: ad0568cf375bf064e8fb00fc72b8e391
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level15.unity
+    guid: 794274c6055b0e84fb06fca4444498df
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level16.unity
+    guid: f541b62ab99946f4c89e0017601e1069
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level17.unity
+    guid: 74dd47322ffa5ca4587d76827eb2f9ef
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level18.unity
+    guid: 9023413f344d3624d9f4641371af5dcd
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level19.unity
+    guid: 78e1b12da6510094fa7edefa6b78974d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level20.unity
+    guid: 7a6ba44296a18f64280c57df9f733ae5
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level21.unity
+    guid: 11b830969d194f544a4796f173ec187a
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level22.unity
+    guid: db02ec63f27f1f84d8e11dfbad2c9e73
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level23.unity
+    guid: 29d1812d20cd1b443869102b54988019
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level24.unity
+    guid: 8fa827ce3e9ba6941bf96f444c81f080
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level25.unity
+    guid: b05d12d6bce80544891e2fd1cd5aabc8
   m_configObjects: {}
