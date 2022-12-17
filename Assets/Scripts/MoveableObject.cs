@@ -13,6 +13,7 @@ public class MoveableObject : MonoBehaviour
     void Start()
     {
         inputController = GameObject.Find("InputController").GetComponent<InputController>();
+ 
     }
 
     private void OnMouseDrag()
@@ -33,6 +34,7 @@ public class MoveableObject : MonoBehaviour
             transform.position = newPos;
         }
     }
+
 
     public void Select()
     {

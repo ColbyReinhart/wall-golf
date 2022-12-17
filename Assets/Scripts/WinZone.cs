@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class WinZone : MonoBehaviour
 {
+    private AudioSource collisionSound;
+
+    private void Awake()
+    {
+        collisionSound = GetComponent<AudioSource>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            collisionSound.Play();
+
             // Open the level clear panel
             // This only happens once, so we can be lazy about it
             GameObject.Find("MenuCanvas").GetComponent<PanelController>().OpenLevelClearPanel();
@@ -20,4 +29,5 @@ public class WinZone : MonoBehaviour
             }
         }
     }
+
 }
