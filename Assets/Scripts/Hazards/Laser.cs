@@ -8,6 +8,7 @@ public class Laser : Hazard
 {
     MeshRenderer laserTexture;
     BoxCollider laserHitbox;
+    InputController incont;
     private bool OnOff = true;
     private bool beginLaser = false;
     public float laserSwitch = 3f;
@@ -20,12 +21,15 @@ public class Laser : Hazard
         laserHitbox = GetComponent<BoxCollider>();
         lst = laserSwitch;
         collisionSound = GetComponent<AudioSource>();
+        incont = FindObjectOfType<InputController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Space")) { beginLaser = !beginLaser; lst = laserSwitch; OnOff = true; }
+        if (incont.GetPlayMode() == false) { beginLaser = false; lst = laserSwitch; OnOff = true; }
+        if (incont.GetPlayMode() == true) { beginLaser = true; }
+        //if (Input.GetButtonDown("Space")) { beginLaser = !beginLaser; lst = laserSwitch; OnOff = true; }
         if (beginLaser == true) {
             lst -= Time.deltaTime;
             double switchTime = Math.Ceiling(lst);

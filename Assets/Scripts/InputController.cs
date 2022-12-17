@@ -217,4 +217,9 @@ public class InputController : MonoBehaviour
             ToggleMode();
         }
     }
+
+    public bool GetPlayMode()
+    {
+        return playMode;
+    }
 }
