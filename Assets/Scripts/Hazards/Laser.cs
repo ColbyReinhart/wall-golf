@@ -12,14 +12,14 @@ public class Laser : Hazard
     private bool beginLaser = false;
     public float laserSwitch = 3f;
     private float lst;
-    //private AudioSource collisionSound;
+    private AudioSource collisionSound;
 
     private void Start()
     {
         laserTexture = GetComponent<MeshRenderer>();
         laserHitbox = GetComponent<BoxCollider>();
         lst = laserSwitch;
-       // collisionSound = GetComponent<AudioSource>();
+        collisionSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class Laser : Hazard
                 OnOff = !OnOff;
                 laserTexture.enabled = OnOff;
                 laserHitbox.enabled = OnOff;
-                //collisionSound.Play();
+                collisionSound.Play();
             }
         } else { laserTexture.enabled = true; laserHitbox.enabled = true; }
     }

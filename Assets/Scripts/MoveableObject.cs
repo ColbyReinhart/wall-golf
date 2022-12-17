@@ -9,14 +9,11 @@ public class MoveableObject : MonoBehaviour
     private InputController inputController;
     private bool isSelected;
     private MoveableObjController.WorldBounds bounds;
-    private AudioSource collisionSound;
-    private const float minVolumeSpeed = 3f;
-    private const float maxVolumeSpeed = 15f;
 
     void Start()
     {
         inputController = GameObject.Find("InputController").GetComponent<InputController>();
-        collisionSound = GetComponent<AudioSource>();
+ 
     }
 
     private void OnMouseDrag()
@@ -36,18 +33,6 @@ public class MoveableObject : MonoBehaviour
             // Move the object to the new position
             transform.position = newPos;
         }
-    }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        // If the ball is going fast enough, play a sound
-      //  if (collision.relativeVelocity.magnitude >= minVolumeSpeed)
-       // {
-            // Volume is dependent on how fast the ball is moving
-            collisionSound.volume = (collision.relativeVelocity.magnitude - minVolumeSpeed) / (maxVolumeSpeed - minVolumeSpeed);
-            collisionSound.Play();
-      //  }
     }
 
 
